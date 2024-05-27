@@ -6,6 +6,7 @@ import com.smalaca.order.domain.PurchaseService;
 import com.smalaca.productscatalogue.domain.NotAvailableProductsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ public class PurchaseRestController {
         this.purchaseService = purchaseService;
     }
 
-
+    @PostMapping
     public ResponseEntity<UUID> purchase(OrderProductCommand command) {
         log.info("MONOLITH: " + getClass().getSimpleName());
         try {

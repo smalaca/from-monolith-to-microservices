@@ -3,12 +3,14 @@ package com.smalaca.productscatalogue.domain;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @Repository
+public
 class ProductRepository {
     private final Map<UUID, Product> products = new HashMap<>();
 
@@ -43,5 +45,9 @@ class ProductRepository {
         productsIds.forEach(productId -> found.add(products.get(productId)));
 
         return found;
+    }
+
+    public Collection<Product> findAll() {
+        return products.values();
     }
 }

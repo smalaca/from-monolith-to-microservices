@@ -2,7 +2,7 @@ package com.smalaca.productscatalogue.domain;
 
 import java.util.UUID;
 
-class Product {
+public class Product {
     private final UUID productId;
     private final String category;
     private final String name;
@@ -25,5 +25,9 @@ class Product {
 
     void buy() {
         amount--;
+    }
+
+    public ProductDto asDto() {
+        return new ProductDto(productId, amount, category, name);
     }
 }
