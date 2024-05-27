@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
 @RestController
 @RequestMapping("purchase")
 @Slf4j
@@ -24,7 +22,7 @@ public class PurchaseRestController {
     }
 
     @PostMapping
-    public ResponseEntity<UUID> purchase(@RequestBody OrderProductCommand command) {
+    public ResponseEntity<Long> purchase(@RequestBody OrderProductCommand command) {
         log.info("MONOLITH: " + getClass().getSimpleName());
         try {
             Order order = purchaseService.purchase(command);

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 
@@ -33,7 +32,7 @@ public class OrderRestController {
     }
 
     @GetMapping("/{orderId}")
-    public OrderDto findOne(@PathVariable UUID orderId) {
+    public OrderDto findOne(@PathVariable Long orderId) {
         log.info("MONOLITH: " + getClass().getSimpleName() + ":findOne");
         return orderRepository.findById(orderId).asDto();
     }

@@ -1,21 +1,19 @@
 package com.smalaca.productscatalogue.domain;
 
-import java.util.UUID;
-
 public class Product {
-    private final UUID productId;
+    private final Long productId;
     private final String category;
     private final String name;
     private int amount;
 
-    Product(UUID productId, int amount, String category, String name) {
+    Product(Long productId, int amount, String category, String name) {
         this.productId = productId;
         this.amount = amount;
         this.category = category;
         this.name = name;
     }
 
-    UUID getProductId() {
+    Long getProductId() {
         return productId;
     }
 

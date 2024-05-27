@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Slf4j
@@ -15,7 +14,7 @@ public class ProductsCatalogue {
         this.productRepository = productRepository;
     }
 
-    public void markAsBought(List<UUID> productsIds) {
+    public void markAsBought(List<Long> productsIds) {
         log.info("MONOLITH: " + getClass().getSimpleName());
 
         if (areAllAvailable(productsIds)) {
@@ -26,7 +25,7 @@ public class ProductsCatalogue {
         }
     }
 
-    private boolean areAllAvailable(List<UUID> products) {
+    private boolean areAllAvailable(List<Long> products) {
         return productRepository.areAllAvailable(products);
     }
 }
