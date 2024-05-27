@@ -14,10 +14,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping("purchase")
 @Slf4j
-public class RestPurchaseController {
+public class PurchaseRestController {
     private final PurchaseService purchaseService;
 
-    RestPurchaseController(PurchaseService purchaseService) {
+    PurchaseRestController(PurchaseService purchaseService) {
         this.purchaseService = purchaseService;
     }
 

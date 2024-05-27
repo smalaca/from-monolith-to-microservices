@@ -23,4 +23,8 @@ public class Order {
     public UUID getOrderId() {
         return orderId;
     }
+
+    public OrderDto asDto() {
+        return new OrderDto(orderId, buyerId, products, address.street(), address.postalCode(), address.city());
+    }
 }
