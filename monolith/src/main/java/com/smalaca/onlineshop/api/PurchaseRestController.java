@@ -1,6 +1,6 @@
 package com.smalaca.onlineshop.api;
 
-import com.smalaca.order.domain.Order;
+import com.smalaca.order.domain.OrderDto;
 import com.smalaca.order.domain.OrderProductCommand;
 import com.smalaca.order.domain.PurchaseService;
 import com.smalaca.productscatalogue.domain.NotAvailableProductsException;
@@ -25,8 +25,8 @@ public class PurchaseRestController {
     public ResponseEntity<Long> purchase(@RequestBody OrderProductCommand command) {
         log.info("MONOLITH: " + getClass().getSimpleName());
         try {
-            Order order = purchaseService.purchase(command);
-            return ResponseEntity.ok(order.getOrderId());
+            OrderDto order = purchaseService.purchase(command);
+            return ResponseEntity.ok(order.orderId());
         } catch (NotAvailableProductsException exception) {
             return ResponseEntity.notFound().build();
         }

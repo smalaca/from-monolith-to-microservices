@@ -15,7 +15,7 @@ public class PurchaseService {
         this.orderRepository = orderRepository;
     }
 
-    public Order purchase(OrderProductCommand command) {
+    public OrderDto purchase(OrderProductCommand command) {
         log.info("MONOLITH: " + getClass().getSimpleName());
 
         productsCatalogue.markAsBought(command.products());
@@ -23,6 +23,6 @@ public class PurchaseService {
         Order order = Order.create(command.buyerId(), command.products(), address);
         orderRepository.save(order);
 
-        return order;
+        return order.asDto();
     }
 }
