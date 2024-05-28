@@ -1,6 +1,5 @@
 package com.smalaca.order.api;
 
-import com.smalaca.order.domain.Order;
 import com.smalaca.order.domain.OrderDto;
 import com.smalaca.order.domain.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController
 @Slf4j
@@ -26,14 +23,12 @@ public class OrderRestController {
     @GetMapping
     public List<OrderDto> findAll() {
         log.info("MONOLITH: " + getClass().getSimpleName() + ":findAll");
-        return orderRepository.findAll().stream()
-                .map(Order::asDto)
-                .collect(toList());
+        return orderRepository.findAll();
     }
 
     @GetMapping("/{orderId}")
     public OrderDto findOne(@PathVariable Long orderId) {
         log.info("MONOLITH: " + getClass().getSimpleName() + ":findOne");
-        return orderRepository.findById(orderId).asDto();
+        return orderRepository.findById(orderId);
     }
 }
