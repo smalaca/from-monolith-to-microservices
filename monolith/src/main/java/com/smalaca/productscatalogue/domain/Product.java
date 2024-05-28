@@ -1,6 +1,6 @@
 package com.smalaca.productscatalogue.domain;
 
-public class Product {
+class Product {
     private final Long productId;
     private final String category;
     private final String name;
@@ -13,10 +13,6 @@ public class Product {
         this.name = name;
     }
 
-    Long getProductId() {
-        return productId;
-    }
-
     boolean isAvailable() {
         return amount > 0;
     }
@@ -25,7 +21,7 @@ public class Product {
         amount--;
     }
 
-    public ProductDto asDto() {
+    ProductDto asDto() {
         return new ProductDto(productId, amount, category, name);
     }
 }

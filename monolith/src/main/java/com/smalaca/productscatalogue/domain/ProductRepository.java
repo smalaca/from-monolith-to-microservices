@@ -3,10 +3,11 @@ package com.smalaca.productscatalogue.domain;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 @Repository
 public
@@ -24,7 +25,7 @@ class ProductRepository {
     }
 
     private void add(Product product) {
-        products.put(product.getProductId(), product);
+        products.put(product.asDto().productId(), product);
     }
 
     boolean areAllAvailable(List<Long> products) {
@@ -46,7 +47,9 @@ class ProductRepository {
         return found;
     }
 
-    public Collection<Product> findAll() {
-        return products.values();
+    public List<ProductDto> findAll() {
+        return products.values().stream()
+                .map(Product::asDto)
+                .collect(toList());
     }
 }
