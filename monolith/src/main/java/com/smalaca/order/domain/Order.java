@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.random.RandomGenerator;
 
 class Order {
+    private static final RandomGenerator RANDOM_GENERATOR = RandomGenerator.getDefault();
+
     private final Long orderId;
     private final Long buyerId;
     private final List<Long> products;
@@ -17,7 +19,7 @@ class Order {
     }
 
     static Order create(Long buyerId, List<Long> products, Address address) {
-        return new Order(RandomGenerator.getDefault().nextLong(), buyerId, products, address);
+        return new Order(RANDOM_GENERATOR.nextLong(), buyerId, products, address);
     }
 
     OrderDto asDto() {
