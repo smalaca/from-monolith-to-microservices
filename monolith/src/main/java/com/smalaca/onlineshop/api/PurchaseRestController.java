@@ -2,6 +2,7 @@ package com.smalaca.onlineshop.api;
 
 import com.smalaca.accounting.domain.AccountingService;
 import com.smalaca.accounting.domain.InvoiceDto;
+import com.smalaca.notification.NotificationService;
 import com.smalaca.order.domain.OrderDto;
 import com.smalaca.order.domain.OrderProductCommand;
 import com.smalaca.order.domain.PurchaseService;
@@ -19,10 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class PurchaseRestController {
     private final PurchaseService purchaseService;
     private final AccountingService accountingService;
+    private final NotificationService notificationService;
 
-    PurchaseRestController(PurchaseService purchaseService, AccountingService accountingService) {
+    PurchaseRestController(PurchaseService purchaseService, AccountingService accountingService, NotificationService notificationService) {
         this.purchaseService = purchaseService;
         this.accountingService = accountingService;
+        this.notificationService = notificationService;
     }
 
     @PostMapping
@@ -31,6 +34,8 @@ public class PurchaseRestController {
         try {
             OrderDto order = purchaseService.purchase(command);
             InvoiceDto invoice = accountingService.createFor(order);
+            notificationService.notifyBuyer(invoice);
+            notificationService.notifyWarehouse(order);
             return ResponseEntity.ok(order.orderId());
         } catch (NotAvailableProductsException exception) {
             return ResponseEntity.notFound().build();
