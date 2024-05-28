@@ -15,5 +15,6 @@
         <module>accounting-service</module>
         <module>notification-service</module>
         <module>transport-service</module>
+        <module>api-gateway</module>
     </modules>
 </project>
