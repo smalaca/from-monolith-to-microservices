@@ -1,55 +1,58 @@
 package com.smalaca.apigateway.api.rest.purchase;
 
+import com.smalaca.apigateway.domain.purchase.Purchase;
+import com.smalaca.apigateway.domain.purchase.PurchaseRepository;
 import com.smalaca.orderservice.command.PurchaseProductCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping("purchase")
 @Slf4j
 public class PurchaseRestController {
-//    private final OrderServiceClient orderServiceClient;
     private final KafkaTemplate<String, PurchaseProductCommand> purchaseProductCommandKafkaTemplate;
     private final String purchaseProductCommandTopicName;
+    private final PurchaseRepository purchaseRepository;
 
     public PurchaseRestController(
             KafkaTemplate<String, PurchaseProductCommand> purchaseProductCommandKafkaTemplate,
-            @Value("${kafka.topics.purchase-product}") String purchaseProductCommandTopicName) {
+            @Value("${kafka.topics.purchase-product}") String purchaseProductCommandTopicName,
+            PurchaseRepository purchaseRepository) {
         this.purchaseProductCommandKafkaTemplate = purchaseProductCommandKafkaTemplate;
         this.purchaseProductCommandTopicName = purchaseProductCommandTopicName;
+        this.purchaseRepository = purchaseRepository;
     }
 
     @PostMapping
-    public ResponseEntity<Long> purchase(@RequestBody OrderProductCommand orderProductCommand) {
+    public Long purchase(@RequestBody OrderProductCommand orderProductCommand) {
         log.info("MICROSERVICE: API GATEWAY: " + getClass().getSimpleName());
-        System.out.println("Received OrderProductCommand: " + orderProductCommand);
-        PurchaseProductCommand command = orderProductCommand.asPurchaseProductCommand();
-        System.out.println("Sent PurchaseProductCommand: " + command);
+        log.info("Received OrderProductCommand: " + orderProductCommand);
+
+        Purchase purchase = Purchase.create();
+        PurchaseProductCommand command = orderProductCommand.asPurchaseProductCommand(purchase.getPurchaseId());
         purchaseProductCommandKafkaTemplate.send(purchaseProductCommandTopicName, command);
-//        PurchaseResponse response = orderServiceClient.purchase(orderProductCommand);
-//        if (response.isSuccess())
-//            return ResponseEntity.ok(response.orderId());
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-        return null;
+        purchaseRepository.save(purchase);
+
+        log.info("Sent PurchaseProductCommand: " + command);
+        return purchase.getPurchaseId();
     }
 
-    // method to get status of the operation
+    @GetMapping("/{purchaseId}")
+    public Purchase findOne(@PathVariable Long purchaseId) {
+        return purchaseRepository.findById(purchaseId);
+    }
 
-    @KafkaListener(
-//            topics = "${kafka.topics.product-bought}",
-            topics = "${kafka.topics.purchase-product}",
-            groupId = "${kafka.group-id}",
-            containerFactory = "purchaseProductCommandListenerContainerFactory")
-    public void listenGroupOneOdd(PurchaseProductCommand command) {
-        System.out.println("Received: " + command);
+    @GetMapping
+    public Collection<Purchase> findAll() {
+        return purchaseRepository.findAll();
     }
 }

@@ -21,7 +21,7 @@ public class PurchaseKafkaListener {
             containerFactory = "purchaseProductCommandListenerContainerFactory")
     public void listenGroupOneOdd(PurchaseProductCommand command) {
         log.info("MICROSERVICE: ORDER SERVICE: " + getClass().getSimpleName());
-        System.out.println("Received PurchaseProductCommand: " + command);
+        log.info("Received PurchaseProductCommand: " + command);
         purchaseService.purchase(command);
     }
 }
