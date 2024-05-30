@@ -1,0 +1,14 @@
+server:
+  port: 9004
+
+kafka:
+  bootstrap-address: localhost:29092
+  group-id: accounting-service-group
+  topics: {
+    product-bought: product-bought
+  }
+
+spring:
+  jackson:
+    serialization:
+      indent_output: true

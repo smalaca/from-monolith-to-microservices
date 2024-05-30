@@ -13,6 +13,7 @@ kafka:
 services:
   order-service: http://localhost:9002
   products-catalogue-service: http://localhost:9003
+  accounting-service: http://localhost:9004
 
 spring:
   jackson:
