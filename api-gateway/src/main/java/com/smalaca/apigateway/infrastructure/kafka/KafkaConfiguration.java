@@ -2,6 +2,7 @@ package com.smalaca.apigateway.infrastructure.kafka;
 
 import com.smalaca.orderservice.command.PurchaseProductCommand;
 import com.smalaca.orderservice.event.ProductBoughtEvent;
+import com.smalaca.orderservice.event.ProductNotBoughtEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -42,6 +43,20 @@ public class KafkaConfiguration {
         properties.put(JsonDeserializer.TRUSTED_PACKAGES, "com.smalaca.orderservice.event");
 
         ConcurrentKafkaListenerContainerFactory<String, ProductBoughtEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(new DefaultKafkaConsumerFactory<>(properties));
+        return factory;
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, ProductNotBoughtEvent> productNotBoughtEventListenerContainerFactory(
+            @Value("${kafka.bootstrap-address}") String bootstrapAddress) {
+        Map<String, Object> properties = new HashMap<>();
+        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        properties.put(JsonDeserializer.TRUSTED_PACKAGES, "com.smalaca.orderservice.event");
+
+        ConcurrentKafkaListenerContainerFactory<String, ProductNotBoughtEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(new DefaultKafkaConsumerFactory<>(properties));
         return factory;
     }

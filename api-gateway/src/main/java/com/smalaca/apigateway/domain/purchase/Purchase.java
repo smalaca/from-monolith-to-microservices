@@ -23,4 +23,8 @@ public class Purchase {
     public void completed() {
         status = PurchaseStatus.COMPLETED;
     }
+
+    public void failed() {
+        status = PurchaseStatus.FAILED;
+    }
 }
