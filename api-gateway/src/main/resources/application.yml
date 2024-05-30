@@ -9,6 +9,9 @@ kafka:
     product-bought: product-bought
   }
 
+services:
+  order-service: http://localhost:9002
+
 spring:
   jackson:
     serialization:

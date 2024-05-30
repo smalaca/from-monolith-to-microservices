@@ -1,4 +1,4 @@
-package com.smalaca.apigateway.api.kafka;
+package com.smalaca.apigateway.api.kafka.purchase;
 
 import com.smalaca.apigateway.domain.purchase.Purchase;
 import com.smalaca.apigateway.domain.purchase.PurchaseRepository;
