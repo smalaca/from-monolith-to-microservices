@@ -21,7 +21,7 @@ public class InvoiceRestController {
 
     @GetMapping
     public List<InvoiceDto> findAll() {
-        log.info("MONOLITH: " + getClass().getSimpleName() + ":findAll");
+        log.info("MICROSERVICE: ACCOUNTING SERVICE: findAll: " + getClass().getSimpleName());
         return invoiceRepository.findAll();
     }
 }

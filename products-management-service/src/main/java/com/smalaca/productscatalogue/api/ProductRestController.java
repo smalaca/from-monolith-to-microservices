@@ -39,7 +39,7 @@ public class ProductRestController {
 
     @GetMapping
     public List<ProductDto> findAll() {
-        log.info("MICROSERVICE: API GATEWAY: findAll: " + getClass().getSimpleName());
+        log.info("MICROSERVICE: PRODUCTS MANAGEMENT: findAll: " + getClass().getSimpleName());
         return productRepository.findAll();
     }
 }
