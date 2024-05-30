@@ -1,6 +1,7 @@
 package com.smalaca.orderservice.infrastructure.eventregistry.kafka;
 
 import com.smalaca.orderservice.event.ProductBoughtEvent;
+import com.smalaca.orderservice.event.ProductNotBoughtEvent;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,16 @@ import java.util.Map;
 public class KafkaProducerConfiguration {
     @Bean
     public KafkaTemplate<String, ProductBoughtEvent> productBoughtEventKafkaTemplate(@Value("${kafka.bootstrap-address}") String bootstrapAddress) {
+        Map<String, Object> properties = new HashMap<>();
+
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+
+        return new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(properties));
+    }
+    @Bean
+    public KafkaTemplate<String, ProductNotBoughtEvent> productNotBoughtEventKafkaTemplate(@Value("${kafka.bootstrap-address}") String bootstrapAddress) {
         Map<String, Object> properties = new HashMap<>();
 
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);

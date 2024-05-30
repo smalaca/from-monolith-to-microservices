@@ -27,7 +27,7 @@ public class PurchaseService {
             orderRepository.save(order);
         } else {
             log.info("MICROSERVICES: ORDER SERVICE: products not marked as bought");
-//            eventRegistry.publish(command.asProductBought(order.asDto().orderId()));
+            eventRegistry.publish(command.asProductNotBought());
         }
     }
 }
