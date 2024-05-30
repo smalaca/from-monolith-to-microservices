@@ -6,8 +6,12 @@ kafka:
   group-id: order-service-group
   topics: {
     purchase-product: purchase-product,
-    product-bought: product-bought
+    product-bought: product-bought,
+    not-available-products-found: not-available-products-found
   }
+
+services:
+  products-catalogue-service: http://localhost:9003
 
 spring:
   jackson:
