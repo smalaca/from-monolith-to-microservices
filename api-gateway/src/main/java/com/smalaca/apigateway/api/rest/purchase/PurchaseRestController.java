@@ -29,9 +29,9 @@ public class PurchaseRestController {
     @PostMapping
     public ResponseEntity<Long> purchase(@RequestBody OrderProductCommand orderProductCommand) {
         log.info("MICROSERVICE: API GATEWAY: " + getClass().getSimpleName());
-        System.out.println("Received: " + orderProductCommand);
+        System.out.println("Received OrderProductCommand: " + orderProductCommand);
         PurchaseProductCommand command = orderProductCommand.asPurchaseProductCommand();
-        System.out.println("Sent: " + command);
+        System.out.println("Sent PurchaseProductCommand: " + command);
         purchaseProductCommandKafkaTemplate.send(purchaseProductCommandTopicName, command);
 //        PurchaseResponse response = orderServiceClient.purchase(orderProductCommand);
 //        if (response.isSuccess())

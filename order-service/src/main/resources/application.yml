@@ -1,0 +1,15 @@
+server:
+  port: 9002
+
+kafka:
+  bootstrap-address: localhost:29092
+  group-id: order-service-group
+  topics: {
+    purchase-product: purchase-product,
+    product-bought: product-bought
+  }
+
+spring:
+  jackson:
+    serialization:
+      indent_output: true
