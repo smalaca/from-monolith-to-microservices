@@ -1,5 +1,6 @@
 package com.smalaca.apigateway.api.rest.purchase;
 
+import com.smalaca.orderservice.command.PurchaseProductCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;

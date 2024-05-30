@@ -1,6 +1,6 @@
 package com.smalaca.apigateway.infrastructure.kafka;
 
-import com.smalaca.apigateway.api.rest.purchase.PurchaseProductCommand;
+import com.smalaca.orderservice.command.PurchaseProductCommand;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -38,7 +38,7 @@ public class KafkaConfiguration {
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        properties.put(JsonDeserializer.TRUSTED_PACKAGES, "com.smalaca.apigateway.api.rest.purchase");
+        properties.put(JsonDeserializer.TRUSTED_PACKAGES, "com.smalaca.orderservice.command");
 
         ConcurrentKafkaListenerContainerFactory<String, PurchaseProductCommand> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(new DefaultKafkaConsumerFactory<>(properties));
