@@ -2,6 +2,7 @@ package com.smalaca.notification.domain;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,5 +12,9 @@ public class NotificationRepository {
 
     void save(Notification notification) {
         notifications.put(notification.getNotificationId(), notification);
+    }
+
+    public Collection<Notification> findAll() {
+        return notifications.values();
     }
 }
