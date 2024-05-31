@@ -1,6 +1,21 @@
 # Monolith vs Microservices
+Intro to present differences between two architectures. Both implementations cover the same [requirements](#requirements).
 1. [With Monolith Architecture](#monolith)
 2. [With Microservices Architecture](#microservices)
+
+### Requirements
+- Create order
+- Mark products as bought
+- Create invoice
+- Send invoice to buyer
+- Notify warehouse 
+- Order transport
+- Expose API to list all:
+  - products
+  - orders
+  - invoices
+  - notifications
+  - transport orders
 
 # Monolith
 ### Modules
@@ -72,3 +87,26 @@
 
 ### Design
 ![microservices design](./pictures/microservices.jpg)
+
+
+# Monolith vs. Microservice
+### Monolith
+* Everything works or everything does not work
+* More code in one repository
+* More knowledge required to start
+* Solutions from different areas are in one place
+
+### Microservices
+* Some services can be down and system can still work
+* Complex infrastructure
+* Risk of introducing Distributed Monolith
+* Additional API gateway as an entry point to the platform
+* Logging, tracing and monitoring is challenging
+* Easier to scale the part
+
+### That's not all folks...
+* Security
+* Retry, Circuit Breaker, Cache
+* Service Registry
+* Configuration Service
+* Distributed Transactions, Eventual Consistency, Outbox Pattern
