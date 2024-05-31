@@ -1,4 +1,4 @@
-package com.smalaca.apigateway.infrastructure.accountingservice.client;
+package com.smalaca.apigateway.infrastructure.transportservice.client;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -8,16 +8,16 @@ import org.springframework.web.client.RestClient;
 import java.util.List;
 
 @Service
-public class RestAccountingServiceClient {
+public class RestTransportServiceClient {
     private final RestClient restClient;
 
-    RestAccountingServiceClient(@Value("${services.accounting-service}") String accountingServiceUrl) {
-        this.restClient = RestClient.create(accountingServiceUrl);
+    RestTransportServiceClient(@Value("${services.transport-service}") String transportServiceUrl) {
+        this.restClient = RestClient.create(transportServiceUrl);
     }
 
-    public List<InvoiceDto> findAll() {
+    public List<TransportOrderDto> findAll() {
         return restClient.get()
-                .uri("invoice")
+                .uri("transport-order")
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {});
     }
