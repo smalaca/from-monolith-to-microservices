@@ -15,6 +15,7 @@ services:
   products-catalogue-service: http://localhost:9003
   accounting-service: http://localhost:9004
   transport-service: http://localhost:9005
+  notification-service: http://localhost:9006
 
 spring:
   jackson:

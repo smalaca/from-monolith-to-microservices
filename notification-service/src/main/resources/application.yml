@@ -1,0 +1,15 @@
+server:
+  port: 9006
+
+kafka:
+  bootstrap-address: localhost:29092
+  group-id: notification-service-group
+  topics: {
+    product-bought: product-bought,
+    invoice-issued: invoice-issued
+  }
+
+spring:
+  jackson:
+    serialization:
+      indent_output: true

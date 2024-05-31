@@ -13,9 +13,9 @@ public class LogisticService {
         this.transportOrderRepository = transportOrderRepository;
     }
 
-    public void orderTransportFor(ProductBoughtEvent order) {
+    public void orderTransportFor(ProductBoughtEvent productBoughtEvent) {
         log.info("MICROSERVICE: TRANSPORT SERVICE: " + getClass().getSimpleName());
-        TransportOrder transportOrder = TransportOrder.create(order.orderId(), order.products());
+        TransportOrder transportOrder = TransportOrder.create(productBoughtEvent.orderId(), productBoughtEvent.products());
         transportOrderRepository.save(transportOrder);
     }
 }
