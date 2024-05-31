@@ -1,5 +1,6 @@
 package com.smalaca.notificationservice.domain;
 
+import com.smalaca.accountingservice.event.InvoiceIssuedEvent;
 import com.smalaca.orderservice.event.ProductBoughtEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,15 +16,15 @@ public class NotificationService {
         this.notificationRepository = notificationRepository;
     }
 
-//    public void notifyBuyer(InvoiceDto invoice) {
-//        log.info("MICROSERVICE: NOTIFICATION SERVICE: " + getClass().getSimpleName());
-//        Notification notification = Notification.builder()
-//                .title("Invoice: " + invoice.invoiceNumber())
-//                .recipientId(invoice.buyerId())
-//                .content(invoice.toString())
-//                .build();
-//        notificationRepository.save(notification);
-//    }
+    public void notifyBuyer(InvoiceIssuedEvent invoice) {
+        log.info("MICROSERVICE: NOTIFICATION SERVICE: " + getClass().getSimpleName());
+        Notification notification = Notification.builder()
+                .title("Invoice: " + invoice.invoiceNumber())
+                .recipientId(invoice.buyerId())
+                .content(invoice.toString())
+                .build();
+        notificationRepository.save(notification);
+    }
 
     public void notifyWarehouse(ProductBoughtEvent productBoughtEvent) {
         log.info("MICROSERVICE: NOTIFICATION SERVICE: " + getClass().getSimpleName());
