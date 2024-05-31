@@ -2,8 +2,8 @@ package com.smalaca.onlineshop.api;
 
 import com.smalaca.accounting.domain.AccountingService;
 import com.smalaca.accounting.domain.InvoiceDto;
-import com.smalaca.logistic.LogisticService;
-import com.smalaca.notification.NotificationService;
+import com.smalaca.logistic.domain.LogisticService;
+import com.smalaca.notification.domain.NotificationService;
 import com.smalaca.order.domain.OrderDto;
 import com.smalaca.order.domain.OrderProductCommand;
 import com.smalaca.order.domain.PurchaseService;

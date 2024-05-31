@@ -1,4 +1,4 @@
-package com.smalaca.logistic;
+package com.smalaca.logistic.domain;
 
 import com.smalaca.order.domain.OrderDto;
 import lombok.extern.slf4j.Slf4j;
