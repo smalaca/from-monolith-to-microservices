@@ -1,0 +1,14 @@
+server:
+  port: 9005
+
+kafka:
+  bootstrap-address: localhost:29092
+  group-id: transport-service-group
+  topics: {
+    product-bought: product-bought
+  }
+
+spring:
+  jackson:
+    serialization:
+      indent_output: true
