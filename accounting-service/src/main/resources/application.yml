@@ -5,7 +5,8 @@ kafka:
   bootstrap-address: localhost:29092
   group-id: accounting-service-group
   topics: {
-    product-bought: product-bought
+    product-bought: product-bought,
+    invoice-issued: invoice-issued
   }
 
 spring:
