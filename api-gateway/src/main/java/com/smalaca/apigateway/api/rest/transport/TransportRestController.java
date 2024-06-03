@@ -3,6 +3,7 @@ package com.smalaca.apigateway.api.rest.transport;
 import com.smalaca.apigateway.infrastructure.transportservice.client.RestTransportServiceClient;
 import com.smalaca.apigateway.infrastructure.transportservice.client.TransportOrderDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +21,12 @@ public class TransportRestController {
     }
 
     @GetMapping
-    public List<TransportOrderDto> findAll() {
+    public ResponseEntity<List<TransportOrderDto>> findAll() {
         log.info("MICROSERVICE: API GATEWAY: findAll: " + getClass().getSimpleName());
-        return restTransportServiceClient.findAll();
+        try {
+            return ResponseEntity.ok(restTransportServiceClient.findAll());
+        } catch (Exception exception) {
+            return ResponseEntity.noContent().build();
+        }
     }
 }
