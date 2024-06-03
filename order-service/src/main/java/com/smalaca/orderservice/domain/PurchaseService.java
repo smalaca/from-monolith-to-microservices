@@ -18,15 +18,19 @@ public class PurchaseService {
     }
 
     public void purchase(PurchaseProductCommand command) {
-        if (productsCatalogue.markAsBought(new ProductsDto(command.products()))) {
-            log.info("MICROSERVICES: ORDER SERVICE: products marked as bought");
-            Address address = new Address(command.street(), command.postalCode(), command.city());
-            Order order = Order.create(command.buyerId(), command.products(), address);
+        try {
+            if (productsCatalogue.markAsBought(new ProductsDto(command.products()))) {
+                log.info("MICROSERVICES: ORDER SERVICE: products marked as bought");
+                Address address = new Address(command.street(), command.postalCode(), command.city());
+                Order order = Order.create(command.buyerId(), command.products(), address);
 
-            eventRegistry.publish(command.asProductBought(order.asDto().orderId()));
-            orderRepository.save(order);
-        } else {
-            log.info("MICROSERVICES: ORDER SERVICE: products not marked as bought");
+                eventRegistry.publish(command.asProductBought(order.asDto().orderId()));
+                orderRepository.save(order);
+            } else {
+                log.info("MICROSERVICES: ORDER SERVICE: products not marked as bought");
+                eventRegistry.publish(command.asProductNotBought());
+            }
+        } catch (Exception exception) {
             eventRegistry.publish(command.asProductNotBought());
         }
     }
