@@ -16,6 +16,9 @@ GET http://localhost:9001/transport-order
 ### list of all notifications
 GET http://localhost:9001/notification
 
+### list of all purchases
+GET http://localhost:9001/purchase
+
 ### details of the purchase where {purchaseId} is an identifier of the order
 GET http://localhost:9001/purchase/purchaseId
 
