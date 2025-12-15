@@ -1,26 +1,26 @@
 ### list of all products
-GET http://localhost:9091/product
+GET http://localhost:9001/product
 
 ### list of all orders
-GET http://localhost:9091/order
+GET http://localhost:9001/order
 
 ### details of the order where {orderId} is an identifier of the order
-GET http://localhost:9091/order/orderId
+GET http://localhost:9001/order/orderId
 
 ### list of all invoices
-GET http://localhost:9091/invoice
+GET http://localhost:9001/invoice
 
 ### list of all transport orders
-GET http://localhost:9091/transport-order
+GET http://localhost:9001/transport-order
 
 ### list of all notifications
-GET http://localhost:9091/notification
+GET http://localhost:9001/notification
 
 ### details of the purchase where {purchaseId} is an identifier of the order
-GET http://localhost:9091/purchase/purchaseId
+GET http://localhost:9001/purchase/purchaseId
 
 ### allows to purchase products
-POST http://localhost:9091/purchase
+POST http://localhost:9001/purchase
 Content-Type: application/json
 
 {
