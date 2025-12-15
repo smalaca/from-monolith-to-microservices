@@ -1,0 +1,29 @@
+### list of all products
+GET http://localhost:8080/product
+
+### list of all orders
+GET http://localhost:8080/order
+
+### details of the order where {orderId} is an identifier of the order
+GET http://localhost:8080/order/{orderId}
+
+### list of all invoices
+GET http://localhost:8080/invoice
+
+### list of all transport orders
+GET http://localhost:8080/transport-order
+
+### list of all notifications
+GET http://localhost:8080/notification
+
+### allows to purchase products
+POST http://localhost:8080/purchase
+Content-Type: application/json
+
+{
+    "buyerId": 13,
+    "products": [4, 5],
+    "street": "Grodzka 13",
+    "postalCode": "01-234",
+    "city": "Cracow"
+}
